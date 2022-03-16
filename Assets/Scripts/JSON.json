@@ -1,0 +1,32 @@
+{
+    "listaPredicions": [
+        {
+            "comentario": "Hoy un frente poco activo llegará a Galicia con el avance del día. Así, se espera una mañana de cielos cubiertos con lloviznas en la mitad norte y a partir del mediodía se irán abriendo tímidos claros, aun con algún chubasco en el tercio norte. Las temperaturas mínimas ascendieron ligeramente mientras que las máximas sufrirán un moderado descenso. El viento por la mañana será flojo en el interior, moderado con intervalos fuertes en la costa; por la tarde será fuerte en el litoral y zonas altas.",
+            "comentarioEsp": "",
+            "dataActualizacion": "2022-03-16T19:05:00",
+            "dataPredicion": "2022-03-16T00:00:00",
+            "dia": 0,
+            "listaMapas": [
+                {
+                    "dia": 0,
+                    "franxa": 1,
+                    "urlMapa": "\/mgrss\/predicion\/cprazo\/getImaxeM.action?dia=0"
+                },
+                {
+                    "dia": 0,
+                    "franxa": 2,
+                    "urlMapa": "\/mgrss\/predicion\/cprazo\/getImaxeT.action?dia=0"
+                },
+                {
+                    "dia": 0,
+                    "franxa": 3,
+                    "urlMapa": "\/mgrss\/predicion\/cprazo\/getImaxeN.action?dia=0"
+                }
+            ],
+            "tendMax": 400,
+            "tendMin": 405,
+            "titulo": "Predicción para el miércoles 16 de marzo de 2022"
+        }
+    ],
+    "urlBase": "https:\/\/servizos.meteogalicia.gal"
+}
