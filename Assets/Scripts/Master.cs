@@ -1,41 +1,76 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using System.Collections;
-// UnityWebRequest.Get example
-
-// Access a website and use UnityWebRequest.Get to download a page.
-// Also try to download a non-existing page. Display the error.
-
 public class Master : MonoBehaviour
 {
+
+    public Dia dia;
+    // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GetRequest("https://servizos.meteogalicia.gal/mgrss/predicion/jsonCPrazo.action?dia=0&request_locale=es"));
+        StartCoroutine(GetRequest("https://servizos.meteogalicia.gal/mgrss/predicion/jsonCPrazo.action?dia=0&request_locale=gl"));
     }
 
-    IEnumerator GetRequest(string uri)
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
+    public IEnumerator GetRequest(string url){
 
-            string[] pages = uri.Split('/');
-            int page = pages.Length - 1;
+        using(UnityWebRequest peticion = UnityWebRequest.Get(url)){
 
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.ConnectionError:
-                case UnityWebRequest.Result.DataProcessingError:
-                    Debug.LogError(pages[page] + ": Error: " + webRequest.error);
-                    break;
-                case UnityWebRequest.Result.ProtocolError:
-                    Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
-                    break;
+            yield return peticion.SendWebRequest();
+
+            switch(peticion.result){
+
                 case UnityWebRequest.Result.Success:
-                    Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
-                    break;
+
+                Debug.Log("Debería salir el texto de las cosas: "+peticion.downloadHandler.text);
+
+                dia = JsonUtility.FromJson<Dia>(peticion.downloadHandler.text);
+
+                Debug.Log("Debería indicar que hay un objeto: "+dia);
+
+                break;
+
             }
         }
     }
+}
+
+public class Dia{
+
+    public List<Predicion> listaPredicions;
+
+    public string urlBase;
+
+}
+
+public class Predicion{
+
+    public string comentario;
+
+    public string comentarioEsp;
+
+    public string dataActualizacion;
+
+    public string dataPredicion;
+
+    public int dia;
+
+    public List<Mapas> listaMapas; 
+
+    public int tendMax;
+
+    public int tendMin;
+
+    public string titulo;   
+
+}
+
+public class Mapas{
+
+    public int dia;
+
+    public int franxa;
+
+    public string urlMapa;
 }
