@@ -10,7 +10,9 @@ public class Master : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         StartCoroutine(GetRequest("https://servizos.meteogalicia.gal/mgrss/predicion/jsonCPrazo.action?dia=0&request_locale=gl"));
+
     }
 
     public IEnumerator GetRequest(string url){
@@ -29,6 +31,20 @@ public class Master : MonoBehaviour
 
                 Debug.Log("Debería indicar que hay un objeto: "+dia);
 
+                Debug.Log("URL base: "+dia.urlBase);
+
+                Predicion predicion = dia.listaPredicions[0];
+
+                Debug.Log("Comentario do día: "+predicion.comentario);
+
+                Debug.Log("Título: "+predicion.titulo);
+
+                Mapas mapas = predicion.listaMapas[0];
+
+                Debug.Log("Franxa: "+mapas.franxa);
+
+                Debug.Log("URL do mapa: "+url);
+
                 break;
 
             }
@@ -36,6 +52,7 @@ public class Master : MonoBehaviour
     }
 }
 
+[Serializable]
 public class Dia{
 
     public List<Predicion> listaPredicions;
@@ -44,6 +61,7 @@ public class Dia{
 
 }
 
+[Serializable]
 public class Predicion{
 
     public string comentario;
@@ -66,6 +84,7 @@ public class Predicion{
 
 }
 
+[Serializable]
 public class Mapas{
 
     public int dia;
